@@ -1,0 +1,32 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "fluttermodular",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "fluttermodular (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "fluttermodular (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "Rodar Terminal - main_terminal.dart",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/terminal/main_terminal.dart"
+        }
+        
+    ]
+}
