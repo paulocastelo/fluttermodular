@@ -1,9 +1,12 @@
 // v.1.0: Refatoração com inclusão do  lib/terminal/utils/validador.dart
 // v.1.1: Refatoração com inclusão do lib/terminal/utils/io_helpers.dart
-// v.1.2: Criação de função para o menu 
+// v.1.2: Criação de função para o menu
+// v.1.3: Inclusão das opções de categoria da pessoa
+// v.1.4: Ajustes para utilizar enum CategoriaPessoa
 
 import 'dart:io';
 import '../models/pessoa.dart';
+import '../models/categoria_pessoa.dart';
 import '../services/cadastro_service.dart';
 import '../utils/validador.dart';
 import '../utils/io_helpers.dart';
@@ -11,30 +14,15 @@ import '../utils/io_helpers.dart';
 void mostraMenu(CadastroService service) {
   while (true) {
     exibirMenu();
-    // v. 1.2
-    // print("\n==== MENU CRUD ====");
-    // print("1. Adicionar Pessoa");
-    // print("2. Listar Pessoas");
-    // print("3. Editar Pessoa");
-    // print("4. Remover Pessoa");
-    // print("5. Sair");
-
-    stdout.write("Digite o numero da opcao: ");
-    int? opcao = int.parse(stdin.readLineSync()!);
+    int? opcao = lerInt("Digite o número da opção: ");
 
     switch (opcao) {
       case 1:
-        // v. 1.1
-          // stdout.write("Digite o nome: ");
-          // String? nome = stdin.readLineSync();
         String nome = lerString("Digite o nome: ");
         if (!isNomeValido(nome)) {
           print("Nome inválido. Tente novamente.");
           continue;
         }
-        // v. 1.1
-        // stdout.write("Digite o email: ");
-        // String? email = stdin.readLineSync();
         String email = lerString("Digite o email: ");
         if (email != null) {
           email = email.trim();
@@ -43,7 +31,16 @@ void mostraMenu(CadastroService service) {
           print("Email inválido. Tente novamente.");
           continue;
         }
-        service.adicionar(Pessoa(nome, email));
+
+        exibirSubmenu();
+        int categoria = lerInt("Digite apenas o número da categoria: ");
+        if (categoria >= 1 && categoria <= CategoriaPessoa.values.length) {
+          final categoriaSelecionada = CategoriaPessoa.values[categoria - 1];
+          service.adicionar(
+            Pessoa(nome: nome, email: email, categoria: categoriaSelecionada),
+          );
+          ;
+        }
         print("Pessoa adicionada com sucesso!");
         break;
       case 2:
@@ -53,9 +50,6 @@ void mostraMenu(CadastroService service) {
       case 3:
         print("==== EDITAR PESSOA ====");
         service.listar();
-        // v. 1.1
-          // stdout.write("Digite o número da pessoa a ser editada: ");
-          // int? indice = int.parse(stdin.readLineSync()!);
         int indice = lerInt("Digite o número da pessoa a ser editada: ");
         if (indice < 1 || indice > service.pessoas.length) {
           print("Índice inválido. Tente novamente.");
@@ -64,35 +58,38 @@ void mostraMenu(CadastroService service) {
           print("O que deseja editar: ");
           print("1. Nome");
           print("2. Email");
-          // v. 1.1
-            // stdout.write("Digite o número da opção: ");
-            // int? opcaoEditar = int.parse(stdin.readLineSync()!);
+          print("3. Categoria");
           int opcaoEditar = lerInt("Digite o número da opção: ");
           switch (opcaoEditar) {
             case 1:
-            // v. 1.1
-                // stdout.write("Digite o novo nome: ");
-                // String? novoNome = stdin.readLineSync();
               String novoNome = lerString("Digite o novo nome: ");
               if (!isNomeValido(novoNome)) {
                 print("Nome inválido. Tente novamente.");
                 continue;
               }
-              service.editar(indice - 1, novoNome);
+              service.editarNome(indice - 1, novoNome);
               break;
             case 2:
-              // v. 1.1
-                // stdout.write("Digite o novo email: ");
-                // String? novoEmail = stdin.readLineSync();
               String novoEmail = lerString("Digite o novo email: ");
-              if(novoEmail != null) {
+              if (novoEmail != null) {
                 novoEmail = novoEmail.trim();
               }
               if (!isEmailValido(novoEmail)) {
                 print("Email inválido. Tente novamente.");
                 continue;
               }
-              service.editar(indice - 1, novoEmail!);
+              service.editarEmail(indice - 1, novoEmail!);
+              break;
+            case 3:
+              exibirSubmenu();
+              int novaCategoria = lerInt("Digite a nova categoria da pessoa: ");
+
+              if (novaCategoria >= 1 &&
+                  novaCategoria <= CategoriaPessoa.values.length) {
+                final categoriaSelecionada =
+                    CategoriaPessoa.values[novaCategoria - 1];
+                service.editarCategoria(indice - 1, novaCategoria - 1);
+              }
               break;
             default:
               print("Opção inválida. Tente novamente.");
@@ -103,10 +100,9 @@ void mostraMenu(CadastroService service) {
       case 4:
         print("==== REMOVER PESSOA ====");
         service.listar();
-        // v. 1.1
-          // stdout.write("Digite o número da pessoa a ser removida: ");
-          // int? indiceRemover = int.parse(stdin.readLineSync()!);
-        int indiceRemover = lerInt("Digite o número da pessoa a ser removida: ");
+        int indiceRemover = lerInt(
+          "Digite o número da pessoa a ser removida: ",
+        );
         if (indiceRemover < 1 || indiceRemover > service.pessoas.length) {
           print("Índice inválido. Tente novamente.");
           continue;
@@ -122,7 +118,7 @@ void mostraMenu(CadastroService service) {
   }
 }
 
-void exibirMenu(){
+void exibirMenu() {
   print("==== MENU ====");
   print("1. Adicionar Pessoa");
   print("2. Listar Pessoas");
@@ -131,19 +127,9 @@ void exibirMenu(){
   print("5. Sair");
 }
 
-// V.1.0
-// Substituídos por lib/terminal/utils/validador.dart
-// bool validaNome(String? nome) {
-//   if (nome != null && nome.isNotEmpty) {
-//     return true;
-//   } else {
-//     return false;
-//   }
-// }
-
-// V.1.0
-// bool validaEmail(String? email) {
-//   if (email == null) return false;
-//   final regex = RegExp(r"^[\w\.-]+@[\w\.-]+\.\w+$");
-//   return regex.hasMatch(email.trim());
-// }
+void exibirSubmenu() {
+  print("==== MENU CATEGORIA ====");
+  for (int i = 0; i < CategoriaPessoa.values.length; i++) {
+    print("${i + 1}. ${CategoriaPessoa.values[i].descricao}"); // v. 1.4
+  }
+}

@@ -1,5 +1,5 @@
-import 'pages/menu_crud.dart';
 import 'services/cadastro_service.dart';
+import 'views/pessoa_menu_crud.dart';
 
 void main(){
   CadastroService service = CadastroService();
