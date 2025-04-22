@@ -1,6 +1,4 @@
 import 'entidade.dart';
-import 'pessoa.dart';
-import 'categoria_pessoa.dart';
 import 'categoria_mentoria.dart';
 
 class Assunto extends Entidade {

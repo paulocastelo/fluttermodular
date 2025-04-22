@@ -20,10 +20,19 @@ class PerfilUsuarioService {
 
   void editarNome(int index, String novoNome) {
     perfis[index].nome = novoNome;
+    perfis[index].dataUltimaAlteracao = DateTime.now();
   }
 
   void editarDescricao(int index, String novaDescricao) {
     perfis[index].descricao = novaDescricao;
+    perfis[index].dataUltimaAlteracao = DateTime.now();
+  }
+
+  
+
+  void ativaDesativar(int index, bool novoStatus) {
+    perfis[index].ativo = novoStatus;
+    perfis[index].dataUltimaAlteracao = DateTime.now();
   }
 
   void remover(int index) {

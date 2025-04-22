@@ -1,29 +1,4 @@
-### ✅ 1. Arquivo: `bin/terminal.dart`
-
-Crie o arquivo `bin/terminal.dart` com o seguinte conteúdo:
-
-```dart
-// bin/terminal.dart
-import 'package:flutterBasic/terminal/main.dart' as terminal;
-
-void main() {
-  terminal.main();
-}
-```
-
-> 🔧 **Observação:** Certifique-se de que o nome no `import` (`flutterBasic`) corresponda exatamente ao nome definido no `pubspec.yaml`:
-```yaml
-name: flutterBasic
-```
-
----
-
-### ✅ 2. Arquivo: `README_TERMINAL.md`
-
-Aqui está o conteúdo para criar um `README_TERMINAL.md` explicando o uso do modo terminal:
-
-```markdown
-# 🧪 Módulo Terminal - flutterBasic
+# 🧪 Módulo Terminal - fluttermodular
 
 Este módulo permite que você interaja com o sistema de cadastro diretamente pelo terminal (linha de comando), utilizando uma estrutura modular e reutilizável em Dart.
 
