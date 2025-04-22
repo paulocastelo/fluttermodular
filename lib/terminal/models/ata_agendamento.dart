@@ -1,7 +1,7 @@
-import 'entidade.dart';
+import 'entidade_base.dart';
 import 'pessoa.dart';
 import 'agendamento.dart';
-class AtaAgendamento extends Entidade{
+class AtaAgendamento extends EntidadeBase<AtaAgendamento> {
   
   DateTime ? dataCriacao;
   DateTime ? dataAtualizacao;
@@ -33,4 +33,14 @@ class AtaAgendamento extends Entidade{
     this.mentores,
     this.mentorados
   }) : super(id);
+
+  @override
+  String toString() {
+    return 'AtaAgendamento{id: $id, titulo: $titulo, descricao: $descricao, dataCriacao: $dataCriacao, ativo: $ativo}';
+  }
+
+  @override
+  String toStringCustomizado() {
+    return 'AtaAgendamento{id: $id, titulo: $titulo, descricao: $descricao, ativo: $ativo}';
+  }
 }

@@ -1,7 +1,7 @@
-import 'entidade.dart';
+import 'entidade_base.dart';
 import 'funcionalidade_sistema.dart';
 
-class ModuloSistema extends Entidade{
+class ModuloSistema extends EntidadeBase<ModuloSistema>{
   String? nome;
   String? descricao;
   List<FuncionalidadeSistema>? funcionalidades;
@@ -21,4 +21,10 @@ class ModuloSistema extends Entidade{
     this.usuarioCriacao,
     this.ativo,
   }) : super(id);
+
+  @override
+  String toStringCustomizado() {
+    return 'ModuloSistema{id: $id, nome: $nome, descricao: $descricao, ativo: $ativo}';
+  }
+
 }

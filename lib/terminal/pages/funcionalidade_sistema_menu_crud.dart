@@ -1,30 +1,25 @@
-import '../models/categoria_mentoria.dart';
-import '../services/categoria_mentoria_service.dart';
+import '../models/funcionalidade_sistema.dart';
+import '../services/funcionalidade_sistema_service.dart';
 import '../utils/io_helpers.dart';
 
-void mostrarMenuCategoriaMentoria(CategoriaMentoriaService service) {
+void mostrarMenuFuncionalidadeSistema(FuncionalidadeSistemaService service) {
   while (true) {
-    print('\n==== MENU CATEGORIA DE MENTORIA ====');
-    print('1. Adicionar Categoria');
-    print('2. Listar Categorias');
-    print('3. Editar Categoria');
-    print('4. Remover Categoria');
-    print('5. Voltar');
+    mostraMenu();
 
     int opcao = lerInt("Digite o número da opção: ");
 
     switch (opcao) {
       case 1:
-        String titulo = lerString("Título da categoria:");
+        String nome = lerString("Nome da funcionalidade:");
         String descricao = lerString("Descrição:");
-        service.adicionar(CategoriaMentoria(
-          titulo: titulo,
+        service.adicionar(FuncionalidadeSistema(
+          nome: nome,
           descricao: descricao,
           dataCriacao: DateTime.now(),
           ativo: true,
           usuarioCriacao: "admin",
         ));
-        print("✅ Categoria adicionada com sucesso!");
+        print("✅ Funcionalidade adicionada com sucesso!");
         break;
 
       case 2:
@@ -33,19 +28,19 @@ void mostrarMenuCategoriaMentoria(CategoriaMentoriaService service) {
 
       case 3:
         service.listar();
-        int index = lerInt("Número da categoria a editar:");
-        if (index < 1 || index > service.categorias.length) {
+        int index = lerInt("Número da funcionalidade a editar:");
+        if (index < 1 || index > service.funcionalidades.length) {
           print("❌ Índice inválido.");
           break;
         }
 
-        print("1. Editar Título");
+        print("1. Editar Nome");
         print("2. Editar Descrição");
         int opcaoEdit = lerInt("Opção:");
         switch (opcaoEdit) {
           case 1:
-            String novoTitulo = lerString("Novo título:");
-            service.editarTitulo(index - 1, novoTitulo);
+            String novoNome = lerString("Novo nome:");
+            service.editarNome(index - 1, novoNome);
             break;
           case 2:
             String novaDescricao = lerString("Nova descrição:");
@@ -58,13 +53,13 @@ void mostrarMenuCategoriaMentoria(CategoriaMentoriaService service) {
 
       case 4:
         service.listar();
-        int indexRemover = lerInt("Número da categoria a remover:");
-        if (indexRemover < 1 || indexRemover > service.categorias.length) {
+        int indexRemover = lerInt("Número da funcionalidade a remover:");
+        if (indexRemover < 1 || indexRemover > service.funcionalidades.length) {
           print("❌ Índice inválido.");
           break;
         }
         service.remover(indexRemover - 1);
-        print("🗑️ Categoria removida.");
+        print("🗑️ Funcionalidade removida.");
         break;
 
       case 5:
@@ -74,4 +69,13 @@ void mostrarMenuCategoriaMentoria(CategoriaMentoriaService service) {
         print("❌ Opção inválida.");
     }
   }
+}
+
+void mostraMenu() {
+  print("==== MENU FUNCIONALIDADE ====");
+  print("1. Adicionar Funcionalidade");
+  print("2. Listar Funcionalidades");
+  print("3. Editar Funcionalidade");
+  print("4. Remover Funcionalidade");
+  print("5. Sair");
 }

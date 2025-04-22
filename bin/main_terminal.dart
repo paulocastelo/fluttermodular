@@ -1,7 +1,7 @@
 import 'package:fluttermodular/terminal/services/cadastro_service.dart';
 import 'package:fluttermodular/terminal/services/assunto_service.dart';
-import 'package:fluttermodular/terminal/views/pessoa_menu_crud.dart';
-import 'package:fluttermodular/terminal/views/assunto_menu_crud.dart';
+import 'package:fluttermodular/terminal/pages/pessoa_menu_crud.dart';
+import 'package:fluttermodular/terminal/pages/assunto_menu_crud.dart';
 import 'package:fluttermodular/terminal/utils/io_helpers.dart';
 
 void main() {

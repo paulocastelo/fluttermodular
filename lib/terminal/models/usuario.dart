@@ -1,9 +1,9 @@
-import 'entidade.dart';
+import 'entidade_base.dart';
 import 'pessoa.dart';
 import 'modulo_sistema.dart';  
 import 'perfil_usuario.dart';
 
-class Usuario extends Entidade{
+class Usuario extends EntidadeBase<Usuario>{
   Pessoa ? pessoa;
   String? login; // Login deve ser o email e unico
   String? senha; // Senha deve ser criptografada
@@ -14,15 +14,13 @@ class Usuario extends Entidade{
   List<PerfilUsuario>? perfisUsuario;
 
   Usuario({
+    int id = 0,
     this.pessoa,
     this.login,
     this.senha,
     this.dataCriacao,
-    // this.dataAtualizacao,
-    // this.dataInativacao,
     this.ativo,
-    // this.perfisUsuario,
-  }) : super(0);
+  }) : super(id);
 
   @override
   String toStringCustomizado() {

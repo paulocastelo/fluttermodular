@@ -29,6 +29,11 @@ class AtaAgendamentoService {
     atas[index].agendamento?.assunto = novoAssunto;
   }
 
+  /// Edita o titulo da ata
+  void editarTitulo(int index, String novoTitulo) {
+    atas[index].titulo = novoTitulo;
+  }
+
   /// Edita a descrição da ata
   void editarDescricao(int index, String novaDescricao) {
     atas[index].descricao = novaDescricao;

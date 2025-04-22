@@ -1,6 +1,6 @@
-import 'package:fluttermodular/terminal/models/entidade.dart';
+import 'entidade_base.dart';
 
-class CategoriaMentoria extends Entidade{
+class CategoriaMentoria extends EntidadeBase<CategoriaMentoria> {
   String ? titulo;
   String ? descricao;
   DateTime ? dataCriacao;
@@ -25,6 +25,11 @@ class CategoriaMentoria extends Entidade{
 
   @override
   String toString() {
-    return 'CategoriaMentoria{id: $id,titulo: $titulo, descricao: $descricao, dataCriacao: $dataCriacao, dataAtualizacao: $dataAtualizacao, usuarioCriacao: $usuarioCriacao, usuarioAtualizacao: $usuarioAtualizacao, usuarioExclusao: $usuarioExclusao, ativo: $ativo}';
+    return 'CategoriaMentoria{id: $id,titulo: $titulo, descricao: $descricao, dataCriacao: $dataCriacao, ativo: $ativo}';
+  }
+
+  @override
+  String toStringCustomizado() {
+    return 'CategoriaMentoria{id: $id, titulo: $titulo, descricao: $descricao, ativo: $ativo}';
   }
 }

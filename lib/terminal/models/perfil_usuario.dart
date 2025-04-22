@@ -1,7 +1,7 @@
-import 'entidade.dart';
+import 'entidade_base.dart';
 import 'modulo_sistema.dart';
 
-class PerfilUsuario extends Entidade{
+class PerfilUsuario extends EntidadeBase<PerfilUsuario>{
   String? nome;
   String? descricao;
   List<ModuloSistema>? modulosSistema;
@@ -21,5 +21,10 @@ class PerfilUsuario extends Entidade{
     this.usuarioCriacao,
     this.ativo,
   }) : super (id);
+
+  @override
+  String toStringCustomizado(){
+    return 'PerfilUsuario{id: $id, nome: $nome, descricao: $descricao, ativo: $ativo}';
+  }
 
 }

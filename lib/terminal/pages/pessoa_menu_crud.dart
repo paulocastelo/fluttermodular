@@ -11,9 +11,9 @@ import '../services/cadastro_service.dart';
 import '../utils/validador.dart';
 import '../utils/io_helpers.dart';
 
-void mostraMenu(CadastroService service) {
+void mostrarMenuPessoa(CadastroService service) {
   while (true) {
-    exibirMenu();
+    mostrarMenu();
     int? opcao = lerInt("Digite o número da opção: ");
 
     switch (opcao) {
@@ -118,7 +118,7 @@ void mostraMenu(CadastroService service) {
   }
 }
 
-void exibirMenu() {
+void mostrarMenu() {
   print("==== MENU ====");
   print("1. Adicionar Pessoa");
   print("2. Listar Pessoas");

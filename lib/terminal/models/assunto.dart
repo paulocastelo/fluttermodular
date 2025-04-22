@@ -1,7 +1,7 @@
-import 'entidade.dart';
+import 'entidade_base.dart';
 import 'categoria_mentoria.dart';
 
-class Assunto extends Entidade {
+class Assunto extends EntidadeBase<Assunto> {
   String ? titulo;
   String ? descricao;
   DateTime ? dataCriacao;
@@ -27,7 +27,12 @@ class Assunto extends Entidade {
 
   @override
   String toString() {
-    return 'assunto{id: $id\nTitle: $titulo\ndescription: $descricao\nCreation: $dataCriacao, Update: $dataAtualizacao\nCreation User: $usuarioCriacao, Update user: $usuarioAtualizacao, usuarioExclusao: $usuarioExclusao\nAtivo: $ativo}';
+    return 'assunto{id: $id\nTitle: $titulo\ndescription: $descricao\nCreation: $dataCriacao, Update: $dataAtualizacao\nCreation User: $usuarioCriacao, \nAtivo: $ativo}';
+  }
+
+  @override
+  String toStringCustomizado() {
+    return 'Assunto{id: $id, titulo: $titulo, descricao: $descricao, dataCriacao: $dataCriacao, ativo: $ativo}';
   }
 
 }

@@ -1,16 +1,16 @@
-import 'entidade.dart';
+import 'entidade_base.dart';
 import 'categoria_pessoa.dart';
 
-class Pessoa extends Entidade {
+class Pessoa extends EntidadeBase<Pessoa> {
   String nome;
   String email;
-  CategoriaPessoa? categoria;
+  CategoriaPessoa categoria;
 
   Pessoa({
     required this.nome,
     required this.email,
-    categoria = const [CategoriaPessoa.comum],    
-    int id = 0, // O id padrão é 0, mas pode ser alterado
+    this.categoria = CategoriaPessoa.comum,
+    int id = 0,
   }) : super(id);
 
   @override
@@ -19,8 +19,8 @@ class Pessoa extends Entidade {
   }
 
   @override
-String toStringCustomizado() {
-  return 'Pessoa{id: $id, nome: $nome, email: $email, categoria: ${categoria?.descricao}}';
-}
-
+  String toStringCustomizado() {
+    return 'Pessoa{id: $id, nome: $nome, email: $email, categoria: ${categoria?.descricao}}';
+  }
+  
 }
