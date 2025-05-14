@@ -1,5 +1,4 @@
 import 'entidade_base.dart';
-import 'entidade.dart';
 
 class FuncionalidadeSistema extends EntidadeBase<FuncionalidadeSistema> {
   String ? nome;

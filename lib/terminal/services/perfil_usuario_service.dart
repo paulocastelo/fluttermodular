@@ -1,41 +1,19 @@
 import '../models/perfil_usuario.dart';
+import 'service_base.dart';
 
-class PerfilUsuarioService {
-  final List<PerfilUsuario> perfis = [];
-
-  void adicionar(PerfilUsuario perfil) {
-    perfis.add(perfil);
+class PerfilUsuarioService extends ServiceBase<PerfilUsuario> {
+  @override
+  void editarCampo(int index, void Function(PerfilUsuario item) callback) {
+    super.editarCampo(index, (perfil) {
+      callback(perfil);
+      perfil.dataUltimaAlteracao = DateTime.now();
+    });
   }
 
-  void listar() {
-    if (perfis.isEmpty) {
-      print("🚫 Nenhum perfil de usuário cadastrado.");
-    } else {
-      for (int i = 0; i < perfis.length; i++) {
-        final p = perfis[i];
-        print('${i + 1}. ${p.nome ?? "(Sem nome)"} - ${p.descricao ?? "(Sem descrição)"}');
-      }
+  void ativarDesativar (int index, bool novoStatus) {
+    if(index >= 0 && index < itens.length) {
+      itens[index].ativo = novoStatus;
+      itens[index].dataUltimaAlteracao = DateTime.now();
     }
-  }
-
-  void editarNome(int index, String novoNome) {
-    perfis[index].nome = novoNome;
-    perfis[index].dataUltimaAlteracao = DateTime.now();
-  }
-
-  void editarDescricao(int index, String novaDescricao) {
-    perfis[index].descricao = novaDescricao;
-    perfis[index].dataUltimaAlteracao = DateTime.now();
-  }
-
-  
-
-  void ativaDesativar(int index, bool novoStatus) {
-    perfis[index].ativo = novoStatus;
-    perfis[index].dataUltimaAlteracao = DateTime.now();
-  }
-
-  void remover(int index) {
-    perfis.removeAt(index);
   }
 }

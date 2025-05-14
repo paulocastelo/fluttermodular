@@ -15,12 +15,12 @@ class Pessoa extends EntidadeBase<Pessoa> {
 
   @override
   String toString() {
-    return 'Pessoa{id: $id,👤 Nome: $nome | 📧 Email: $email | 🏷️ Categorias: ${categoria?.descricao}}';
+    return 'Pessoa{id: $id,👤 Nome: $nome | 📧 Email: $email | 🏷️ Categorias: ${categoria.descricao}}';
   }
 
   @override
   String toStringCustomizado() {
-    return 'Pessoa{id: $id, nome: $nome, email: $email, categoria: ${categoria?.descricao}}';
+    return 'Pessoa{id: $id, nome: $nome, email: $email, categoria: ${categoria.descricao}}';
   }
   
 }

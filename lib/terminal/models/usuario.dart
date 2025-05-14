@@ -1,6 +1,5 @@
 import 'entidade_base.dart';
 import 'pessoa.dart';
-import 'modulo_sistema.dart';  
 import 'perfil_usuario.dart';
 
 class Usuario extends EntidadeBase<Usuario>{

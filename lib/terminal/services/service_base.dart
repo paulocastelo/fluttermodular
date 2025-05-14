@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import '../models/entidade_base.dart';
 
 abstract class ServiceBase<T extends EntidadeBase> {
@@ -25,6 +26,14 @@ abstract class ServiceBase<T extends EntidadeBase> {
     }
   }
 
+  // Método callback Editar
+  // O método callback é uma função que é passada como argumento para outro método
+  // e é chamada dentro desse método. Isso permite que você defina o comportamento
+  // específico que deseja executar quando o método callback for chamado.
+  void editarCampo(int index, void Function(T item) callback) {
+    if (_validarIndice(index)) callback(_itens[index]);
+  }
+
   void remover(int index) {
     if (_validarIndice(index)) {
       _itens.removeAt(index);
@@ -37,5 +46,9 @@ abstract class ServiceBase<T extends EntidadeBase> {
       return false;
     }
     return true;
+  }
+
+  T? buscarPorId(int id) {
+    return _itens.firstWhereOrNull((e) => e.id == id);
   }
 }

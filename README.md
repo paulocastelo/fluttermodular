@@ -1,6 +1,8 @@
+---
+
 # 🧪 Módulo Terminal - fluttermodular
 
-Este módulo permite que você interaja com o sistema de cadastro diretamente pelo terminal (linha de comando), utilizando uma estrutura modular e reutilizável em Dart.
+Este módulo permite que você interaja com o sistema de sessões e mentorias diretamente pelo terminal, com um foco educativo e arquitetural em Dart.
 
 ---
 
@@ -9,40 +11,49 @@ Este módulo permite que você interaja com o sistema de cadastro diretamente pe
 Execute o seguinte comando no terminal:
 
 ```bash
-dart run bin/terminal.dart
+dart run bin/main_terminal.dart
 ```
 
-Este comando chamará o `main()` localizado em `lib/terminal/main.dart`.
+Este comando redireciona para o arquivo principal localizado em `lib/terminal/main.dart`.
 
 ---
 
-## 📁 Estrutura
+## 🧠 Arquitetura Atualizada
 
 ```
 bin/
-└── terminal.dart       # Ponto de entrada para o modo terminal
+└── main_terminal.dart     # Ponto de entrada que referencia lib/terminal/main.dart
 
 lib/
 └── terminal/
-    ├── main.dart       # Chamada do menu principal do CRUD
-    ├── menu_crud.dart  # Lógica de navegação
-    ├── models/
-    ├── services/
-    └── utils/
+    ├── main.dart                         # Menu principal do sistema via terminal
+    ├── pages/                            # Telas do terminal (menus de cada entidade)
+    ├── models/                           # Entidades e enums
+    ├── services/                         # Serviços com lógica de negócio
+    └── utils/                            # Funções auxiliares como validações e leitura
 ```
+
+---
+
+## ✅ Observações importantes
+
+- O serviço anteriormente chamado `CadastroService` foi renomeado para `PessoaService` para refletir melhor sua responsabilidade.
+- A função principal `main.dart` foi ajustada para rodar perfeitamente no terminal, sem nenhuma dependência de pacotes visuais como `flutter/rendering.dart`.
+- Cada entidade possui seu próprio **menu de interação** e seu **serviço responsável pela lógica**.
 
 ---
 
 ## 🎯 Objetivo
 
 Este módulo foi criado para:
-- Treinar conceitos de **POO**, **funções**, **validações** e **modularização**.
-- Criar um CRUD completo usando apenas entrada/saída padrão (`stdin`/`stdout`).
-- Reaproveitar as **mesmas lógicas e validações** que podem futuramente ser adaptadas para a versão com interface gráfica (Flutter Widgets).
+- Treinar conceitos de **POO com Dart** em terminal.
+- Desenvolver estrutura **modular, testável e reaproveitável**.
+- Facilitar a migração posterior para **Flutter**, mantendo os serviços intactos.
 
 ---
 
 ## ✨ Autor
 **Paulo Castelo**  
 [github.com/paulocastelo](https://github.com/paulocastelo)
-```
+
+---

@@ -1,9 +1,11 @@
+import 'package:fluttermodular/terminal/services/service_base.dart';
+
 import '../models/agendamento.dart';
 import '../models/pessoa.dart';
 import '../models/assunto.dart';
 import '../models/status_agendamento.dart';
 
-class AgendamentoService {
+class AgendamentoService extends ServiceBase<Agendamento> {
   final List<Agendamento> agendamentos = [];
 
   void adicionar(Agendamento agendamento) {

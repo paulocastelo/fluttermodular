@@ -4,14 +4,13 @@
 // v.1.3: Inclusão das opções de categoria da pessoa
 // v.1.4: Ajustes para utilizar enum CategoriaPessoa
 
-import 'dart:io';
 import '../models/pessoa.dart';
 import '../models/categoria_pessoa.dart';
-import '../services/cadastro_service.dart';
+import '../services/pessoa_service.dart';
 import '../utils/validador.dart';
 import '../utils/io_helpers.dart';
 
-void mostrarMenuPessoa(CadastroService service) {
+void mostrarMenuPessoa(PessoaService service) {
   while (true) {
     mostrarMenu();
     int? opcao = lerInt("Digite o número da opção: ");
@@ -24,9 +23,7 @@ void mostrarMenuPessoa(CadastroService service) {
           continue;
         }
         String email = lerString("Digite o email: ");
-        if (email != null) {
-          email = email.trim();
-        }
+        email = email.trim();
         if (!isEmailValido(email)) {
           print("Email inválido. Tente novamente.");
           continue;
@@ -39,7 +36,6 @@ void mostrarMenuPessoa(CadastroService service) {
           service.adicionar(
             Pessoa(nome: nome, email: email, categoria: categoriaSelecionada),
           );
-          ;
         }
         print("Pessoa adicionada com sucesso!");
         break;
@@ -51,7 +47,7 @@ void mostrarMenuPessoa(CadastroService service) {
         print("==== EDITAR PESSOA ====");
         service.listar();
         int indice = lerInt("Digite o número da pessoa a ser editada: ");
-        if (indice < 1 || indice > service.pessoas.length) {
+        if (indice < 1 || indice > service.itens.length) {
           print("Índice inválido. Tente novamente.");
           continue;
         } else {
@@ -67,18 +63,16 @@ void mostrarMenuPessoa(CadastroService service) {
                 print("Nome inválido. Tente novamente.");
                 continue;
               }
-              service.editarNome(indice - 1, novoNome);
+              service.editarCampo(indice -1, (p) => p.nome = novoNome);
               break;
             case 2:
               String novoEmail = lerString("Digite o novo email: ");
-              if (novoEmail != null) {
-                novoEmail = novoEmail.trim();
-              }
+              novoEmail = novoEmail.trim();
               if (!isEmailValido(novoEmail)) {
                 print("Email inválido. Tente novamente.");
                 continue;
               }
-              service.editarEmail(indice - 1, novoEmail!);
+              service.editarCampo(indice - 1, (p) => p.email = novoEmail);
               break;
             case 3:
               exibirSubmenu();
@@ -86,9 +80,8 @@ void mostrarMenuPessoa(CadastroService service) {
 
               if (novaCategoria >= 1 &&
                   novaCategoria <= CategoriaPessoa.values.length) {
-                final categoriaSelecionada =
-                    CategoriaPessoa.values[novaCategoria - 1];
-                service.editarCategoria(indice - 1, novaCategoria - 1);
+                service.editarCampo(indice - 1, (p) => p.categoria = 
+                    CategoriaPessoa.values[novaCategoria - 1]);
               }
               break;
             default:
@@ -103,7 +96,7 @@ void mostrarMenuPessoa(CadastroService service) {
         int indiceRemover = lerInt(
           "Digite o número da pessoa a ser removida: ",
         );
-        if (indiceRemover < 1 || indiceRemover > service.pessoas.length) {
+        if (indiceRemover < 1 || indiceRemover > service.itens.length) {
           print("Índice inválido. Tente novamente.");
           continue;
         } else {

@@ -1,4 +1,4 @@
-import 'package:flutter/rendering.dart';
+// import 'package:flutter/rendering.dart';
 
 import 'utils/io_helpers.dart';
 
@@ -14,7 +14,7 @@ import 'pages/modulo_sistema_menu_crud.dart';
 import 'pages/perfil_usuario_menu_crud.dart';
 
 // Imports dos serviços correspondentes
-import 'services/cadastro_service.dart';
+import 'services/pessoa_service.dart';
 import 'services/usuario_service.dart';
 import 'services/assunto_service.dart';
 import 'services/agendamento_service.dart';
@@ -26,7 +26,7 @@ import 'services/perfil_usuario_service.dart';
 
 void main() {
   // Instanciar os serviços
-  final pessoaService = CadastroService();
+  final pessoaService = PessoaService();
   final usuarioService = UsuarioService();
   final assuntoService = AssuntoService();
   final agendamentoService = AgendamentoService();
